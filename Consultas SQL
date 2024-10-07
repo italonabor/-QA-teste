@@ -4,7 +4,7 @@ Consulte SQL para listar o nome de todos os alunos matriculados na disciplina de
 
 SQLite
 
-Copiar código
+
 SELECT aluno.nome 
 FROM aluno
 JOIN matricula ON aluno.id = matricula.aluno_id
@@ -12,37 +12,37 @@ JOIN disciplina ON matricula.disciplina_id = disciplina.id
 JOIN professor ON disciplina.professor_id = professor.id
 WHERE disciplina.nome = 'Cálculo' 
 AND professor.nome = 'João';
+
 Consulte SQL para exibir a quantidade de alunos por disciplinas:
 
 SQLite
 
-Copiar código
 SELECT disciplina.nome, COUNT(aluno.id) AS quantidade_alunos
 FROM disciplina
 JOIN matricula ON disciplina.id = matricula.disciplina_id
 JOIN aluno ON matricula.aluno_id = aluno.id
 GROUP BY disciplina.nome;
+
 Consulte SQL para listar as disciplinas que todos os professores lecionam:
 
 SQLite
 
-Copiar código
 SELECT disciplina.nome
 FROM disciplina
 GROUP BY disciplina.nome
 HAVING COUNT(DISTINCT professor_id) = (SELECT COUNT(*) FROM professor);
+
 Consulta SQL que exibe o total de professores:
 
 SQLite
 
-Copiar código
 SELECT COUNT(*) AS total_professores
 FROM professor;
+
 Consulte SQL para listar todos os alunos que cursaram alguma disciplina do ano 2000 até 2020:
 
 SQLite
 
-Copiar código
 SELECT DISTINCT aluno.nome
 FROM aluno
 JOIN matricula ON aluno.id = matricula.aluno_id
