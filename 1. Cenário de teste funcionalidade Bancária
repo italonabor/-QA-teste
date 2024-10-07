@@ -1,0 +1,33 @@
+⦁	Quais cenários de teste você especificaria para validar a funcionalidade do aplicativo bancário desenhado abaixo? Liste todas as premissas adotadas.
+
+Para validar a funcionalidade de um aplicativo bancário, os cenários de teste podem cobrir as principais áreas de uma aplicação desse tipo. Como o anunciado não especifica detalhes, posso sugerir os seguintes cenários:
+
+Premissas Adotadas:
+O aplicativo permite login seguro para diferentes tipos de usuários (clientes e funcionários do banco).
+O aplicativo oferece funcionalidades de visualização de saldo, transferências, pagamentos e consultas de extrato.
+O aplicativo possui funcionalidades de segurança, como autenticação multifator e recuperação de senha.
+Cenários de teste sugeridos:
+Teste de Login:
+
+Cenário positivo: O usuário insere credenciais válidas e consegue acessar sua conta.
+Cenário negativo: O usuário insere credenciais inválidas e recebe uma mensagem de erro.
+Teste de Consulta de Saldo:
+
+Cenário positivo: Cliente consulta o saldo da conta e o saldo está correto.
+Cenário negativo: Erro de autenticação impede a visualização do saldo.
+Teste de Transferência de Fundos:
+
+Cenário positivo: Cliente transfere fundos com sucesso para outra conta.
+Cenário negativo: Falha na transferência devido a saldo insuficiente.
+Teste de Pagamento de Contas:
+
+Cenário positivo: Cliente realiza o pagamento de uma fatura com sucesso.
+Cenário negativo: Falha no pagamento devido a falha no sistema de verificação da conta.
+Teste de Extrato Bancário:
+
+Cenário positivo: Cliente visualiza corretamente o extrato de um período específico.
+Cenário negativo: Sistema não encontra registros para o período selecionado.
+Teste de Segurança:
+
+Cenário positivo: A autenticação multifator é exigida após login em um novo dispositivo.
+Cenário negativo: Tentativa de acesso não autorizado, bloqueio de conta.
