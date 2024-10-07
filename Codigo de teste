@@ -1,0 +1,76 @@
+describe('Trello API - Automação com Cypress', () => {
+  const apiKey = 'd9fce84f32284e0d1789d958f1c78087'; // Sua API Key
+  const token = 'ATTAe36e425bedd01532a7021dd26c4ca197ff8202273b13acba04bca9297da414b59E57737F'; // Seu Token
+  let boardId; // Variável para armazenar o ID do board
+  let listId; // Para armazenar o ID da lista
+  let cardId; // Para armazenar o ID do card
+
+  it('Deve criar um novo board no Trello', () => {
+    cy.request({
+      method: 'POST',
+      url: 'https://api.trello.com/1/boards/',
+      qs: {
+        name: 'Meu Board Cypress',
+        key: apiKey,
+        token: token
+      }
+    }).then((response) => {
+      expect(response.status).to.eq(200);
+      boardId = response.body.id; // Armazena o ID do board
+    });
+  });
+
+  it('Deve criar um novo card no board', () => {
+    cy.request({
+      method: 'GET',
+      url: `https://api.trello.com/1/boards/${boardId}/lists`,
+      qs: {
+        key: apiKey,
+        token: token
+      }
+    }).then(response => {
+      expect(response.status).to.eq(200);
+      listId = response.body[0].id; // Armazena o ID da lista
+
+      cy.request({
+        method: 'POST',
+        url: 'https://api.trello.com/1/cards',
+        qs: {
+          name: 'Meu Card Cypress',
+          idList: listId,
+          key: apiKey,
+          token: token
+        }
+      }).then(response => {
+        expect(response.status).to.eq(200);
+        cardId = response.body.id; // Armazena o ID do card
+      });
+    });
+  });
+
+  it('Deve excluir o card criado', () => {
+    cy.request({
+      method: 'DELETE',
+      url: `https://api.trello.com/1/cards/${cardId}`,
+      qs: {
+        key: apiKey,
+        token: token
+      }
+    }).then(response => {
+      expect(response.status).to.eq(200);
+    });
+  });
+
+  it('Deve excluir o board criado', () => {
+    cy.request({
+      method: 'DELETE',
+      url: `https://api.trello.com/1/boards/${boardId}`,
+      qs: {
+        key: apiKey,
+        token: token
+      }
+    }).then(response => {
+      expect(response.status).to.eq(200);
+    });
+  });
+});
