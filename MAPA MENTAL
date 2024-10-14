@@ -1,0 +1,30 @@
+Frame 1
+A API do Trello permite a integração de aplicações com o sistema de gerenciamento de projetos Trello, possibilitando a automação de tarefas e a manipulação de boards, listas e cards [1].
+Introdução à API do Trello
+A autenticação é baseada em tokens, o que garante a segurança dos dados dos usuários ao interagir com a API [2].
+O que é a API do Trello?
+A API do Trello possui limites de requisições: 300 requisições a cada 10 segundos por chave de API e 100 requisições por token [3].
+Para acessar a API do Trello, primeiro, você precisa de um API Key , que pode ser gerada por meio da criação de um Power-Up [3].
+Limites de Requisições da API
+Como obter a chave de API e token
+Se esses limites forem excedidos , o usuário será  informado  com um código  de erro  429  ( too  many request)
+Considerações sobre Limites e Erros
+Depois, você deve gerar um token que ficará vinculado ao seu aplicativo, dando acesso ao usuário [2].
+Automação com Trello API e Cypress
+Erros como 400 (Bad Request) e 401 (Unauthorized) podem ocorrer se as requisições forem mal formatadas ou se as credenciais não forem válidas [3].
+Tratamento de erros comuns na API
+È crucial  tratar esses erros  adequadamente  no código  para forrnecer   feedback  claro durante  o processo de  automação [3]
+Autenticação com a API do Trello
+O primeiro teste cria um card dentro de um board específico. Para isso, o código faz uma solicitação GET para obter as listas do board e depois usa o ID da lista para criar um novo card [1].
+Criando um novo card
+O código usa o before para criar um board no Trello antes de executar os testes, garantindo que o ambiente esteja pronto para testes [2].
+Interação com os Cards do Trello
+Configuração inicial do Cypress
+A verificação da resposta garante que o card foi criado com sucesso [1].
+Estrutura do Teste em Cypress
+O board criado é armazenado na variável boardId , permitindo acesso a ele nos testes subsequentes.
+Um Segundo teste  é responsavel pela exclusão  do card criado. Assim  como na  criação,  usa-se  o  ID  do card  armazenado  para fazer a requisição  de exclusão [2]
+Exclusão do card criado
+Remoção dos dados após testes
+O uso do after serve para garantir que o board criado  durante o teste seja deletado,  mantendo o ambiente limpo e  sem resíduo  de testes anteriores
+      
