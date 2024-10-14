@@ -5,7 +5,8 @@ describe('Trello API - Automação com Cypress', () => {
   let listId; // Para armazenar o ID da lista
   let cardId; // Para armazenar o ID do card
 
-  it('Deve criar um novo board no Trello', () => {
+  // Criar o board antes de todos os testes
+  before(() => {
     cy.request({
       method: 'POST',
       url: 'https://api.trello.com/1/boards/',
@@ -20,6 +21,21 @@ describe('Trello API - Automação com Cypress', () => {
     });
   });
 
+  // Apagar o board após todos os testes
+  after(() => {
+    cy.request({
+      method: 'DELETE',
+      url: `https://api.trello.com/1/boards/${boardId}`,
+      qs: {
+        key: apiKey,
+        token: token
+      }
+    }).then(response => {
+      expect(response.status).to.eq(200);
+    });
+  });
+
+  // Teste para criar um card no board
   it('Deve criar um novo card no board', () => {
     cy.request({
       method: 'GET',
@@ -48,23 +64,11 @@ describe('Trello API - Automação com Cypress', () => {
     });
   });
 
+  // Teste para excluir o card criado
   it('Deve excluir o card criado', () => {
     cy.request({
       method: 'DELETE',
       url: `https://api.trello.com/1/cards/${cardId}`,
-      qs: {
-        key: apiKey,
-        token: token
-      }
-    }).then(response => {
-      expect(response.status).to.eq(200);
-    });
-  });
-
-  it('Deve excluir o board criado', () => {
-    cy.request({
-      method: 'DELETE',
-      url: `https://api.trello.com/1/boards/${boardId}`,
       qs: {
         key: apiKey,
         token: token
